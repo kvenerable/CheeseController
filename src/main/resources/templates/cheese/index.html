@@ -18,12 +18,14 @@
 
     </ul>
     -->
+    <ul>
     <table>
         <tr th:each="cheese : ${cheeses}">
-            <td th:text="${cheese.cheeseName}">Cheese</td>
-            <td th:text="${cheese.cheeseInfo}">Description</td>
+            <td th:text="${cheese.key}">Cheese</td>
+            <td th:text="${cheese.value}">Description</td>
         </tr>
     </table>
+    </ul>
 
 </body>
 </html>

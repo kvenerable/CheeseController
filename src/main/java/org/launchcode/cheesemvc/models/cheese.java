@@ -6,31 +6,34 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class cheese {
+
     @NotNull
-    @Size(min=3, max=15)
+    @Size(min=3, max=15, message = "Name must not be empty or more than 15 characters long")
     private String name;
 
     @NotNull
-    @Size(min=1, message ="Description must not be empty")
+    @Size(min=1, message = "Description must not be empty")
     private String description;
 
     private CheeseType type;
 
+    @NotNull
+    @Range(min=1, max=5, message = "Please enter a valid rating")
+    private Integer rating;
+
     private int cheeseId;
     private static int nextId = 1;
 
-    @NotNull
-    @Range(min=1, max=5, message = "please add rating")
-    private int rating;
-
     public cheese(String name, String description, Integer rating) {
+        // Call the default constructor for the given class
         this();
         this.name = name;
         this.description = description;
         this.rating = rating;
-
     }
 
+    // Make no-arg constructor to use nextId to initialize the cheese ID field
+    // Ensures it's unique for every single cheese object created
     public cheese() {
         cheeseId = nextId;
         nextId++;
@@ -60,6 +63,14 @@ public class cheese {
         this.description = description;
     }
 
+    public Integer getRating() {
+        return rating;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
+    }
+
     public CheeseType getType() {
         return type;
     }
@@ -68,11 +79,4 @@ public class cheese {
         this.type = type;
     }
 
-    public int getRating() {
-        return rating;
-    }
-
-    public void setRating(int rating) {
-        this.rating = rating;
-    }
 }

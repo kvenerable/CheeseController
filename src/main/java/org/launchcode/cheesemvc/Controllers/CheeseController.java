@@ -1,19 +1,15 @@
 package org.launchcode.cheesemvc.Controllers;
 
+import org.launchcode.cheesemvc.models.CheeseData;
+import org.launchcode.cheesemvc.models.CheeseType;
+import org.launchcode.cheesemvc.models.cheese;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
 
-        import org.launchcode.cheesemvc.models.CheeseData;
-        import org.launchcode.cheesemvc.models.CheeseType;
-        import org.launchcode.cheesemvc.models.cheese;
-        import org.springframework.stereotype.Controller;
-        import org.springframework.ui.Model;
-        import org.springframework.validation.Errors;
-        import org.springframework.web.bind.annotation.*;
-
-        import javax.validation.Valid;
-        import java.util.ArrayList;
-
-
-
+import javax.validation.Valid;
+import java.util.ArrayList;
 
 @Controller
 @RequestMapping("cheese")
@@ -93,7 +89,7 @@ public class CheeseController {
 
 
     @RequestMapping(value = "edit/{cheeseId}", method = RequestMethod.POST)
-    public String processEditForm(int cheeseId, String name, String description, Integer rating, CheeseType type, @ModelAttribute @Valid cheese thatCheese, Model model, Errors errors) {
+    public String processEditForm(@PathVariable int cheeseId, String name, String description, CheeseType type, Integer rating, @ModelAttribute @Valid cheese thatCheese, Errors errors, Model model) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Edit");
@@ -102,17 +98,13 @@ public class CheeseController {
         }
 
         thatCheese = CheeseData.getById(cheeseId);
-
         thatCheese.setName(name);
         thatCheese.setDescription(description);
-        thatCheese.setRating(rating);
         thatCheese.setType(type);
+        thatCheese.setRating(rating);
 
         return "redirect:/cheese";
 
     }
-    }
 
-
-
-
+}

@@ -24,8 +24,12 @@
             <option th:each="cheeseType : ${cheeseTypes}"
                     th:text="${cheeseType.name}"
                     th:value="${cheeseType}"></option>
-
         </select>
+    </div>
+    <div class="form-group">
+        <label th:for="rating">Cheese Rating</label>
+        <input class="form-control" th:field="*{rating}" />
+        <span th:errors="*{rating}" class="error"></span>
     </div>
         <input type="submit" value="Add Cheese"/>
 </form>

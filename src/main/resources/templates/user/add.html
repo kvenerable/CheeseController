@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <title></title>
+</head>
+<body>
+
+<form method="post" style="max-width:600px;" >
+<div>
+    <label type="text">Username:</label>
+    <input class="form-control"/>
+</div>
+
+<div>
+    <label type="email">Email:</label>
+    <input class="form-control"/>
+</div>
+
+
+    <div>
+    <label type="password">Password:</label>
+    <input class="form-control"/>
+    </div>
+
+<div>
+    <label type="type">Verify Password:</label>
+    <input class="form-control"/>
+    <span th:text="${message}"></span>
+</div>
+
+
+
+<input type="submit" value="Add Cheese"/>
+</form>
+
+</body>
+</html>

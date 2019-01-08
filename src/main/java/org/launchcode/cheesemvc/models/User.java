@@ -1,11 +1,17 @@
 package org.launchcode.cheesemvc.models;
 
+import org.hibernate.validator.constraints.Email;
+
 import javax.print.DocFlavor;
+import javax.validation.constraints.Size;
 
 public class User {
 
+    @Size(min=5, max=15)
     private String username;
+    @Email
     private String email;
+    @Size(min=6,message ="Please enter valid password")
     private String password;
 
     public String getUsername() {

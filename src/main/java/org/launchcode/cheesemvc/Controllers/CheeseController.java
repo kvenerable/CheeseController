@@ -3,6 +3,8 @@ package org.launchcode.cheesemvc.Controllers;
 import org.launchcode.cheesemvc.models.CheeseData;
 import org.launchcode.cheesemvc.models.CheeseType;
 import org.launchcode.cheesemvc.models.cheese;
+import org.launchcode.cheesemvc.models.data.CheeseDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -15,13 +17,16 @@ import java.util.ArrayList;
 @RequestMapping("cheese")
 public class CheeseController {
 
+    @Autowired
+    private CheeseDao cheeseDao;
 
     @RequestMapping(value = "")
     public String index(Model model) {
 
 
-        model.addAttribute("cheeses", CheeseData.getAll());
+        model.addAttribute("cheeses", cheeseDao.findAll());
         model.addAttribute("title", " My Cheeses");
+
         return "cheese/index";
 
     }
@@ -45,7 +50,7 @@ public class CheeseController {
             return "cheese/add";
 
         }
-        CheeseData.add(newcheese);
+        cheeseDao.save(newcheese);
         return "redirect:";
 
         //if(cheeseName.isEmpty()){
@@ -61,7 +66,7 @@ public class CheeseController {
     @RequestMapping(value = "remove", method = RequestMethod.GET)
     public String removeCheeseForm(Model model) {
 
-        model.addAttribute("cheeses", CheeseData.getAll());
+        model.addAttribute("cheeses", cheeseDao.findAll());
         model.addAttribute("title", "Remove Cheese");
         return "cheese/remove";
     }
@@ -71,7 +76,7 @@ public class CheeseController {
     public String removeCheese(@RequestParam int[] cheeseIds) {
 
         for (int cheeseId : cheeseIds) {
-            CheeseData.remove(cheeseId);
+            cheeseDao.delete(cheeseId);
 
         }
         return "redirect:";

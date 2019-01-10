@@ -19,6 +19,7 @@ public class CategoryController {
     @Autowired
     private CategoryDao categoryDao;
 
+
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index(Model model) {
         model.addAttribute("title", "Categories");
@@ -46,7 +47,9 @@ public class CategoryController {
             return "category/add";
         }
 
+        model.addAttribute("title", "Add Cheese");
         categoryDao.save(category);
+
         return "redirect:";
     }
 }

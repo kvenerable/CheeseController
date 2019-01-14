@@ -12,7 +12,7 @@
     <p th:unless="${cheeses} and ${cheeses.size()}">No Cheese :(</p>
 
  <!--   <ul>
-        <li th:each="cheese : ${cheeses}" th:text="${cheese}" ></li>
+        <li th:each="Cheese : ${cheeses}" th:text="${Cheese}" ></li>
 
 
 
@@ -39,6 +39,8 @@
 
         </tr>
     </table>
+    <a href="/cheese/add"> Add</a>|
+    <a href="/cheese/remove">Remove </a>
 
 
 </body>

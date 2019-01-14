@@ -1,7 +1,7 @@
 package org.launchcode.cheesemvc.Controllers;
 
 import org.launchcode.cheesemvc.models.Category;
-import org.launchcode.cheesemvc.models.CategoryDao;
+import org.launchcode.cheesemvc.models.data.CategoryDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,15 +41,18 @@ public class CategoryController {
     public String add(Model model,
                       @ModelAttribute @Valid Category category, Errors errors) {
 
-        if (errors.hasErrors()) {
-            model.addAttribute("title", "Add Category");
 
+
+        if (errors.hasErrors()) {
+            model.addAttribute("category", categoryDao.findAll());
             return "category/add";
         }
 
-        model.addAttribute("title", "Add Cheese");
         categoryDao.save(category);
 
         return "redirect:";
     }
+
+
+
 }

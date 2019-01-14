@@ -3,16 +3,14 @@ package org.launchcode.cheesemvc.models;
 import org.hibernate.validator.constraints.Range;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 
 @Entity
-public class cheese {
+public class Cheese {
 
     @Id
     @GeneratedValue
@@ -29,21 +27,24 @@ public class cheese {
     @ManyToOne
     private Category category;
 
+    @ManyToMany(mappedBy = "cheeses")
+    private List<Menu> menus;
+
     @NotNull
     @Range(min=1, max=5, message = "Please enter a valid rating")
     private Integer rating;
 
 
-    public cheese(String name, String description, Integer rating) {
+    public Cheese(String name, String description, Integer rating) {
         // Call the default constructor for the given class
         this.name = name;
         this.description = description;
         this.rating = rating;
     }
 
-    // Make no-arg constructor to use nextId to initialize the cheese ID field
-    // Ensures it's unique for every single cheese object created
-    public cheese() {
+    // Make no-arg constructor to use nextId to initialize the Cheese ID field
+    // Ensures it's unique for every single Cheese object created
+    public Cheese() {
 
     }
 
